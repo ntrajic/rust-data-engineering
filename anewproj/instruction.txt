@@ -1,0 +1,82 @@
+1.1 cargo new projectname
+1.2 cargo build
+1.3 cargo run
+1.4. projectname/src/lib.rs    has: 
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b       // return a+b
+}
+// which is invoked in main.rs    projectname::add(1,2);
+
+cd projectname				// projectname is "anewproj"
+2. tree -I "target|Cargo.lock"           // prints only useful source files
+
+.
+├── Cargo.toml
+├── instruction.txt
+└── src
+    ├── lib.rs
+    └── main.rs
+
+1 directory, 4 files
+
+3. tree projectname			// prints jiberish bin files, too:
+
+.
+├── Cargo.lock
+├── Cargo.toml
+├── instruction.txt
+├── src
+│   ├── lib.rs
+│   └── main.rs
+└── target
+    ├── CACHEDIR.TAG
+    └── debug
+        ├── anewproj
+        ├── anewproj.d
+        ├── build
+        ├── deps
+        │   ├── anewproj-6e839ccc45e5680d
+        │   ├── anewproj-6e839ccc45e5680d.d
+        │   ├── anewproj-e8493ceda5150abb
+        │   ├── anewproj-e8493ceda5150abb.d
+        │   ├── anewproj-f5390f6f7a1a91db.d
+        │   ├── libanewproj-f5390f6f7a1a91db.rlib
+        │   └── libanewproj-f5390f6f7a1a91db.rmeta
+        ├── examples
+        ├── incremental
+        │   ├── anewproj-1ziq3249aoxqp
+        │   │   ├── s-gsvf96g4ra-1u9pumx-2a9ef5etu73gx
+        │   │   │   ├── 1gcgxs793qvdi4q9.o
+        │   │   │   ├── 1j653fa03qviwfza.o
+        │   │   │   ├── 2715rl6ct86b3j84.o
+        │   │   │   ├── 4ukh3iz3gjw8olcw.o
+        │   │   │   ├── 50wqg2kk2tubx3kk.o
+        │   │   │   ├── dep-graph.bin
+        │   │   │   ├── h49zyijlemf9ha3.o
+        │   │   │   ├── mk7dnpsykabm8x6.o
+        │   │   │   ├── query-cache.bin
+        │   │   │   └── work-products.bin
+        │   │   └── s-gsvf96g4ra-1u9pumx.lock
+        │   ├── anewproj-2t23mvh1q0ork
+        │   │   ├── s-gsvexgt48g-zh90lk-39h1dexeevmc4
+        │   │   │   ├── 17viff0mgosb972.o
+        │   │   │   ├── 1vnq17t9a8vohxmf.o
+        │   │   │   ├── 1wgrlwydf5mwe51i.o
+        │   │   │   ├── 3bdrtoatwpa59uf1.o
+        │   │   │   ├── 3x50ywpcgi2kkom2.o
+        │   │   │   ├── 592vir31bmfsbnrb.o
+        │   │   │   ├── dep-graph.bin
+        │   │   │   ├── query-cache.bin
+        │   │   │   └── work-products.bin
+        │   │   └── s-gsvexgt48g-zh90lk.lock
+        │   └── anewproj-5736r83s12pz
+        │       ├── s-gsvf7u88mu-2fspqr-358jbz4r1pwwb
+        │       │   ├── 21mkcp84zs6kua48.o
+        │       │   ├── dep-graph.bin
+        │       │   ├── query-cache.bin
+        │       │   └── work-products.bin
+        │       └── s-gsvf7u88mu-2fspqr.lock
+        ├── libanewproj.d
+        └── libanewproj.rlib
+
+13 directories, 43 files
