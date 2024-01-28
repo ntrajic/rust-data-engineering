@@ -1,0 +1,3 @@
+
+NOTE: @ntrajic ➜ /workspaces/rust-data-engineering (main) 
+$ git clone https://github.com/nogibjj/hello-rust-template-example.git hello-marco-template-example
