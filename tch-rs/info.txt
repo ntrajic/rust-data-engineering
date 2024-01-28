@@ -1,0 +1,249 @@
+cd tch-rs
+tree -I "target|Cargo.lock"
+// directory structure of useful source files for pytorch model deployment in rust
+.
+├── build.rs
+├── Cargo.toml
+├── CHANGELOG.md
+├── clippy.toml
+├── dune-project
+├── examples
+│   ├── basics.rs
+│   ├── char-rnn
+│   │   ├── main.rs
+│   │   └── README.md
+│   ├── cifar
+│   │   └── main.rs
+│   ├── custom-optimizer
+│   │   ├── main.rs
+│   │   ├── README.md
+│   │   └── sparse_adam.rs
+│   ├── gan
+│   │   └── main.rs
+│   ├── jit
+│   │   ├── main.rs
+│   │   ├── README.md
+│   │   └── resnet.py
+│   ├── jit-quantized
+│   │   ├── main.rs
+│   │   ├── README.md
+│   │   └── resnet.py
+│   ├── jit-trace
+│   │   ├── main.rs
+│   │   ├── README.md
+│   │   └── test.py
+│   ├── jit-train
+│   │   ├── main.rs
+│   │   ├── README.md
+│   │   └── resnet.py
+│   ├── llama
+│   │   ├── convert_checkpoint.py
+│   │   ├── main.rs
+│   │   └── sentencepiece.rs
+│   ├── memory_test.rs
+│   ├── min-gpt
+│   │   ├── main.rs
+│   │   └── README.md
+│   ├── mnist
+│   │   ├── main.rs
+│   │   ├── mnist_conv.rs
+│   │   ├── mnist_linear.rs
+│   │   ├── mnist_nn.rs
+│   │   └── README.md
+│   ├── neural-style-transfer
+│   │   ├── main.rs
+│   │   └── README.md
+│   ├── pretrained-models
+│   │   └── main.rs
+│   ├── python-extension
+│   │   ├── build.rs
+│   │   ├── Cargo.toml
+│   │   ├── README.md
+│   │   ├── src
+│   │   │   └── lib.rs
+│   │   └── test.py
+│   ├── reinforcement-learning
+│   │   ├── a2c.rs
+│   │   ├── atari_wrappers.py
+│   │   ├── ddpg.rs
+│   │   ├── gym_env.rs
+│   │   ├── main.rs
+│   │   ├── policy_gradient.rs
+│   │   ├── ppo.rs
+│   │   ├── README.md
+│   │   └── vec_gym_env.rs
+│   ├── stable-diffusion
+│   │   ├── main.rs
+│   │   ├── media
+│   │   │   ├── robot11.jpg
+│   │   │   ├── robot13.jpg
+│   │   │   ├── robot3.jpg
+│   │   │   ├── robot4.jpg
+│   │   │   ├── robot7.jpg
+│   │   │   └── robot8.jpg
+│   │   └── README.md
+│   ├── tensor-tools.rs
+│   ├── transfer-learning
+│   │   ├── main.rs
+│   │   └── README.md
+│   ├── translation
+│   │   ├── dataset.rs
+│   │   ├── lang.rs
+│   │   └── main.rs
+│   ├── vae
+│   │   └── main.rs
+│   └── yolo
+│       ├── coco_classes.rs
+│       ├── darknet.rs
+│       ├── main.rs
+│       └── yolo-v3.cfg
+├── gen
+│   ├── dune
+│   ├── gen.ml
+│   └── gen.mli
+├── info.txt
+├── LICENSE-APACHE
+├── LICENSE-MIT
+├── Makefile
+├── pyo3-tch
+│   ├── build.rs
+│   ├── Cargo.toml
+│   └── src
+│       └── lib.rs
+├── README.md
+├── rustfmt.toml
+├── src
+│   ├── data.rs
+│   ├── error.rs
+│   ├── lib.rs
+│   ├── nn
+│   │   ├── batch_norm.rs
+│   │   ├── conv.rs
+│   │   ├── conv_transpose.rs
+│   │   ├── func.rs
+│   │   ├── group_norm.rs
+│   │   ├── init.rs
+│   │   ├── layer_norm.rs
+│   │   ├── linear.rs
+│   │   ├── mod.rs
+│   │   ├── module.rs
+│   │   ├── optimizer.rs
+│   │   ├── rnn.rs
+│   │   ├── sequential.rs
+│   │   ├── sparse.rs
+│   │   └── var_store.rs
+│   ├── tensor
+│   │   ├── convert.rs
+│   │   ├── display.rs
+│   │   ├── index.rs
+│   │   ├── iter.rs
+│   │   ├── mod.rs
+│   │   ├── npy.rs
+│   │   ├── ops.rs
+│   │   └── safetensors.rs
+│   ├── vision
+│   │   ├── alexnet.rs
+│   │   ├── cifar.rs
+│   │   ├── convmixer.rs
+│   │   ├── dataset.rs
+│   │   ├── densenet.rs
+│   │   ├── dinov2.rs
+│   │   ├── efficientnet.rs
+│   │   ├── export_dinov2.py
+│   │   ├── export_model.py
+│   │   ├── imagenet.rs
+│   │   ├── image.rs
+│   │   ├── inception.rs
+│   │   ├── mnist.rs
+│   │   ├── mobilenet.rs
+│   │   ├── mod.rs
+│   │   ├── resnet.rs
+│   │   ├── rust_image.rs
+│   │   ├── squeezenet.rs
+│   │   └── vgg.rs
+│   └── wrappers
+│       ├── device.rs
+│       ├── image.rs
+│       ├── jit.rs
+│       ├── kind.rs
+│       ├── layout.rs
+│       ├── mod.rs
+│       ├── optimizer.rs
+│       ├── python.rs
+│       ├── scalar.rs
+│       ├── stream.rs
+│       ├── tensor_fallible_generated.rs
+│       ├── tensor_generated.rs
+│       ├── tensor.rs
+│       └── utils.rs
+├── tests
+│   ├── autocast.rs
+│   ├── create_jit_models.py
+│   ├── data_tests.rs
+│   ├── device_tests.rs
+│   ├── display_tests.rs
+│   ├── foo1.pt
+│   ├── foo2.pt
+│   ├── foo3.pt
+│   ├── foo4.pt
+│   ├── foo5.pt
+│   ├── foo6.pt
+│   ├── foo7.pt
+│   ├── foo8.pt
+│   ├── foo.pt
+│   ├── jit_tests.rs
+│   ├── linear
+│   │   ├── bs.npy
+│   │   ├── gen-test-data.py
+│   │   ├── in.npy
+│   │   ├── out.npy
+│   │   └── ws.npy
+│   ├── nn_tests.rs
+│   ├── serialization_tests.rs
+│   ├── tensor_indexing.rs
+│   ├── tensor_tests.rs
+│   ├── test_utils.rs
+│   ├── var_store.rs
+│   └── vision_tests.rs
+├── third_party
+│   └── pytorch
+│       ├── Declarations-v1.10.0.yaml
+│       ├── Declarations-v1.11.0.yaml
+│       ├── Declarations-v1.12.0.yaml
+│       ├── Declarations-v1.13.0.yaml
+│       ├── Declarations-v1.4.0.yaml
+│       ├── Declarations-v1.5.0.yaml
+│       ├── Declarations-v1.6.0.yaml
+│       ├── Declarations-v1.7.0.yaml
+│       ├── Declarations-v1.8.0.yaml
+│       ├── Declarations-v1.9.0.yaml
+│       ├── Declarations-v2.0.0.yaml
+│       ├── Declarations-v2.1.0.yaml
+│       ├── Declarations-v2.2.0.yaml
+│       ├── LICENSE
+│       └── README
+└── torch-sys
+    ├── build.rs
+    ├── Cargo.toml
+    ├── libtch
+    │   ├── CMakeLists.txt
+    │   ├── dummy_cuda_dependency.cpp
+    │   ├── fake_cuda_dependency.cpp
+    │   ├── stb_image.h
+    │   ├── stb_image_resize.h
+    │   ├── stb_image_write.h
+    │   ├── torch_api.cpp
+    │   ├── torch_api_generated.cpp
+    │   ├── torch_api_generated.h
+    │   ├── torch_api.h
+    │   ├── torch_python.cpp
+    │   └── torch_python.h
+    └── src
+        ├── c_generated.rs
+        ├── cuda.rs
+        ├── io.rs
+        ├── lib.rs
+        ├── python.rs
+        └── traits.rs
+
+38 directories, 205 files
