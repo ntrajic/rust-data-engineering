@@ -1,0 +1,3 @@
+potrebno je clonovati template u poseban repo / workspace, kako bi github- worklows takodje bilo klonirani:
+
+git clone https://github.com/nogibjj/github-actions-rust-example.git 
