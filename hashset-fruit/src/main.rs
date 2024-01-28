@@ -20,7 +20,8 @@ fn generate_fruit() -> &'static str {
 fn main() {
     let mut fruit_set = HashSet::new();
     println!("Generating 100 random fruits...");
-    for _ in 0..100 {
+    //for _ in 0..100 {   // 8 of 8 types available
+    for _ in 0..10 {      // 6 of 8 types available
         fruit_set.insert(generate_fruit());
     }
 
