@@ -1,0 +1,49 @@
+make format
+
+
+make lint
+
+make build       // cargo build
+make all         // won't run, must supply args
+
+
+cargo run -- --help      	// to build     --blank /*options*/ --help/*1st arg*/
+
+cargo run -- play "marco" 	// run,  -> unproper args supplied 
+//OUT: Usage: hello-marco --play --name <NAME>
+
+cargo run -- play --name "Marco"   // run -> should respond "Polo"
+
+
+EXAMPLE:
+
+@ntrajic ➜ /workspaces/rust-data-engineering/hello-marco (main) $ make all
+cargo fmt --quiet
+cargo clippy --quiet
+cargo test --quiet
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+cargo build
+   Compiling hello-marco v0.1.0 (/workspaces/rust-data-engineering/hello-marco)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.63s
+@ntrajic ➜ /workspaces/rust-data-engineering/hello-marco (main) $ cargo run -- play --name "Marco"
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/hello-marco play --name Marco`
+Polo
+@ntrajic ➜ /workspaces/rust-data-engineering/hello-marco (main) $ cargo run -- play --name "foo"
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/hello-marco play --name foo`
+What's your name?
