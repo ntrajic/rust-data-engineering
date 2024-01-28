@@ -17,7 +17,7 @@ test:
 
 run:
 	cargo run
-
+cd
 release:
 	cargo build --release
 
