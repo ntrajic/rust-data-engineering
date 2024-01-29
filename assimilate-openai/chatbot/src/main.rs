@@ -1,4 +1,4 @@
-/* 
+/*
 This project uses several libraries:
 - reqwest for making HTTP requests,
 - serde_json for handling JSON data,
@@ -14,7 +14,6 @@ The main function, run_chat_loop, runs a chat loop that:
 - Prints the response,
 - Repeats this process until the user types 'quit' or 'exit'.
 */
-
 
 use chatbot::chatbot::run_chat_loop;
 use reqwest::Client;
