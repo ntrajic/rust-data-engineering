@@ -1,0 +1,139 @@
+@ntrajic ➜ /workspaces/rust-data-engineering/dining-philosopher (main) $ make all
+cargo fmt --quiet
+cargo clippy --quiet
+warning: method `eat` is never used
+  --> src/main.rs:60:8
+   |
+50 | impl Philosopher {
+   | ---------------- method in this implementation
+...
+60 |     fn eat(&self) {
+   |        ^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+cargo test      --quiet
+warning: method `eat` is never used
+  --> src/main.rs:60:8
+   |
+50 | impl Philosopher {
+   | ---------------- method in this implementation
+...
+60 |     fn eat(&self) {
+   |        ^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+cargo run 
+   Compiling dining-philosopher v0.1.0 (/workspaces/rust-data-engineering/dining-philosopher)
+warning: method `eat` is never used
+  --> src/main.rs:60:8
+   |
+50 | impl Philosopher {
+   | ---------------- method in this implementation
+...
+60 |     fn eat(&self) {
+   |        ^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: `dining-philosopher` (bin "dining-philosopher") generated 1 warning
+    Finished dev [unoptimized + debuginfo] target(s) in 0.35s
+     Running `target/debug/dining-philosopher`
+Dining Philosophers Problem:  15 Philosophers, 4 Forks...Yikes!!
+Jürgen Habermas picked up fork 0.
+Jürgen Habermas picked up fork 1.
+Jürgen Habermas is eating.
+Friedrich Engels picked up fork 2.
+Jürgen Habermas finished eating.
+Jürgen Habermas put down fork 0.
+Jürgen Habermas put down fork 1.
+Thomas Piketty picked up fork 0.
+Thomas Piketty picked up fork 3.
+Friedrich Engels picked up fork 1.
+Friedrich Engels is eating.
+Thomas Piketty is eating.
+Friedrich Engels finished eating.
+Friedrich Engels put down fork 2.
+Friedrich Engels put down fork 1.
+Thomas Piketty finished eating.
+Thomas Piketty put down fork 0.
+Thomas Piketty put down fork 3.
+Karl Marx picked up fork 2.
+Karl Marx picked up fork 3.
+Karl Marx is eating.
+Michel Foucault picked up fork 0.
+Michel Foucault picked up fork 1.
+Michel Foucault is eating.
+Karl Marx finished eating.
+Karl Marx put down fork 2.
+Karl Marx put down fork 3.
+Michel Foucault finished eating.
+Michel Foucault put down fork 0.
+Michel Foucault put down fork 1.
+Socrates picked up fork 2.
+Socrates picked up fork 1.
+Socrates is eating.
+Aristotle picked up fork 0.
+Aristotle picked up fork 3.
+Aristotle is eating.
+Socrates finished eating.
+Socrates put down fork 2.
+Socrates put down fork 1.
+Aristotle finished eating.
+Aristotle put down fork 0.
+Aristotle put down fork 3.
+Plato picked up fork 2.
+Plato picked up fork 3.
+Plato is eating.
+Pythagoras picked up fork 0.
+Pythagoras picked up fork 1.
+Pythagoras is eating.
+Plato finished eating.
+Plato put down fork 2.
+Plato put down fork 3.
+Pythagoras finished eating.
+Pythagoras put down fork 0.
+Pythagoras put down fork 1.
+Heraclitus picked up fork 2.
+Heraclitus picked up fork 1.
+Heraclitus is eating.
+Diogenes picked up fork 0.
+Diogenes picked up fork 3.
+Diogenes is eating.
+Heraclitus finished eating.
+Heraclitus put down fork 2.
+Diogenes finished eating.
+Diogenes put down fork 0.
+Diogenes put down fork 3.
+Heraclitus put down fork 1.
+Democritus picked up fork 2.
+Democritus picked up fork 3.
+Democritus is eating.
+Epicurus picked up fork 0.
+Epicurus picked up fork 1.
+Epicurus is eating.
+Epicurus finished eating.
+Epicurus put down fork 0.
+Epicurus put down fork 1.
+Democritus finished eating.
+Democritus put down fork 2.
+Democritus put down fork 3.
+Zeno of Citium picked up fork 2.
+Zeno of Citium picked up fork 1.
+Zeno of Citium is eating.
+Zeno of Citium finished eating.
+Zeno of Citium put down fork 2.
+Zeno of Citium put down fork 1.
+Thales of Miletus picked up fork 2.
+Thales of Miletus picked up fork 3.
+Thales of Miletus is eating.
+Thales of Miletus finished eating.
+Thales of Miletus put down fork 2.
+Thales of Miletus put down fork 3.
+Total time: 9.00224434s
