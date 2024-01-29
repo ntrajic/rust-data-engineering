@@ -21,6 +21,14 @@
 * - Wrapped in Arc to share Mutexes between threads
 * - Numbered philosophers and acquire lower fork first
 * - Prints timing metrics for simulation
+* The provided code is a Rust implementation of the classic concurrency problem known as the “Dining Philosophers” problem1.
+* This problem involves multiple threads (philosophers) needing synchronized access to shared resources (forks), risking deadlock1.
+* In this code, philosophers are modeled as threads and forks as shared Mutex<()> wrapped in Arc for thread-safe reference counting1.
+* To prevent deadlock, philosophers acquire the lower-numbered fork first1. This breaks symmetry and avoids circular waiting1.
+* The unwrap() function in Rust is a method that can be called on Option or Result types23.
+* If called on an Option, unwrap() will return the value inside an Some variant of the Option23.
+* If called on a Result, unwrap() will return the value inside an Ok variant23.
+* If unwrap() is called on a None or Err variant, the function will panic and the program will terminate23.
 */
 
 use std::sync::{Arc, Mutex};
@@ -56,9 +64,46 @@ impl Philosopher {
             (&self.right_fork, &self.left_fork)
         };
 
-        let _first_guard = first_fork.mutex.lock().unwrap();
+        let _first_guard = first_fork.mutex.lock().unwrap();     // unwrap() can be invoked on None or  
         println!("{} picked up fork {}.", self.name, first_fork.id);
         let _second_guard = second_fork.mutex.lock().unwrap();
+        println!("{} picked up fork {}.", self.name, second_fork.id);
+
+        println!("{} is eating.", self.name);
+        thread::sleep(Duration::from_secs(1));
+        println!("{} finished eating.", self.name);
+
+        println!("{} put down fork {}.", self.name, first_fork.id);
+        println!("{} put down fork {}.", self.name, second_fork.id);
+    }
+
+    /*  To make the code more robust and avoid panicking, you could replace unwrap() with more error-handling code.
+     *  For example, instead of calling unwrap() on the MutexGuard returned by lock(),
+     *  you could handle the Err variant explicitly. Here’s how you might modify the eat function:
+     */
+    fn eat_deterministic(&self) {
+        let (first_fork, second_fork) = if self.id % 2 == 0 {
+            (&self.left_fork, &self.right_fork)
+        } else {
+            (&self.right_fork, &self.left_fork)
+        };
+
+        let _first_guard = match first_fork.mutex.lock() {
+            Ok(guard) => guard,
+            Err(e) => {
+                println!("Failed to acquire lock on first fork: {:?}", e);
+                return;
+            }
+        };
+        println!("{} picked up fork {}.", self.name, first_fork.id);
+
+        let _second_guard = match second_fork.mutex.lock() {
+            Ok(guard) => guard,
+            Err(e) => {
+                println!("Failed to acquire lock on second fork: {:?}", e);
+                return;
+            }
+        };
         println!("{} picked up fork {}.", self.name, second_fork.id);
 
         println!("{} is eating.", self.name);
@@ -118,7 +163,8 @@ fn main() {
         .into_iter()
         .map(|philosopher| {
             thread::spawn(move || {
-                philosopher.eat();
+                //philosopher.eat();
+                philosopher.eat_deterministic();
             })
         })
         .collect::<Vec<_>>();
