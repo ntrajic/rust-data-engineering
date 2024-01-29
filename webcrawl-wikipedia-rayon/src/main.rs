@@ -21,7 +21,7 @@ struct ProcessedPage {
     data: String,
 }
 
-const PAGES: [&str; 9] = [
+const PAGES: [&str; 10] = [
     "Giannis Antetokounmpo",
     "James Harden",
     "Russell Westbrook",
@@ -31,6 +31,7 @@ const PAGES: [&str; 9] = [
     "Kobe Bryant",
     "Michael Jordan",
     "Shaquille O'Neal",
+    "Nikola Jokic",
 ];
 
 fn process_page(page: &Page<Client>) -> ProcessedPage {
