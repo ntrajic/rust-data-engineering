@@ -1,0 +1,62 @@
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template (main) $ tree
+.
+├── cuda-11.7.sh
+├── env.sh
+├── hello-pytorch
+│   ├── Cargo.toml
+│   └── src
+│       └── main.rs
+├── install-libtorch.sh
+├── LICENSE
+├── load-mnist.sh
+├── lyrics.txt
+├── Makefile
+├── mnist-cli-gpu
+│   ├── Cargo.toml
+│   ├── Makefile
+│   └── src
+│       ├── lib.rs
+│       └── main.rs
+├── model.pth
+├── portable-pytorch
+│   ├── Cargo.toml
+│   ├── export.py
+│   ├── Makefile
+│   ├── README.md
+│   ├── requirements.txt
+│   └── src
+│       ├── lib.rs
+│       └── main.rs
+├── post-install.sh
+├── pytorch-cli
+├── pytorch-gpu-util
+│   ├── Cargo.toml
+│   └── src
+│       └── main.rs
+├── pytorch-mnist
+│   ├── Cargo.toml
+│   ├── README.md
+│   └── src
+│       ├── main.rs
+│       ├── mnist_conv.rs
+│       ├── mnist_linear.rs
+│       └── mnist_nn.rs
+├── quickstart_pytorch.py
+├── README.md
+├── requirements.txt
+├── setup.sh
+├── stress
+│   ├── Cargo.toml
+│   ├── Makefile
+│   └── src
+│       ├── lib.rs
+│       └── main.rs
+├── translate
+│   ├── Cargo.toml
+│   ├── lyrics.txt
+│   ├── Makefile
+│   └── src
+│       ├── lib.rs
+│       └── main.rs
+└── verify-PyTorch.py
+
