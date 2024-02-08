@@ -5,7 +5,7 @@ use clap::Parser;
 //add extended help
 #[clap(
     version = "1.0",
-    author = "Noah Gift",
+    author = "",
     about = "Finds duplicate files",
     after_help = "Example: rdedupe search --path . --pattern .txt"
 )]
