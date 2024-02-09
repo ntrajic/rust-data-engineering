@@ -1,3 +1,9 @@
+d apps in rust-pytorch-gpu-template:   1. stress   2. rust-bert model (for direct consumption from rust cmd line)
+2nd app requires: git clone https://github.com/guillaume-be/rust-bert.git  (bert model can be directly consumed w/ cargo cmd line)
+
+
+
+
 @ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template (main) $ tree
 .
 ├── cuda-11.7.sh
