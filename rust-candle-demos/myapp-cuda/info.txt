@@ -1,0 +1,42 @@
+
+FOLLOW https://huggingface.github.io/candle/guide/installation.html
+======================================================================
+First, make sure that Cuda is correctly installed.
+nvcc --version should print information about your Cuda compiler driver.
+nvidia-smi --query-gpu=compute_cap --format=csv should print your GPUs compute capability, e.g. something like:
+
+compute_cap
+
+cargo add --git https://github.com/huggingface/candle.git candle-core --features cuda
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-candle-demos/myapp-cuda (main) $ cargo add --git https://github.com/huggingface/candle.git candle-core --features cuda
+    Updating git repository `https://github.com/huggingface/candle.git`
+      Adding candle-core (git) to dependencies.
+             Features:
+             + cuda
+             - accelerate
+             - flash-attn
+             - metal
+             - mkl
+
+
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-candle-demos/myapp-cuda (main) $ cargo build
+   Compiling gemm-common v0.17.1
+   Compiling bindgen_cuda v0.1.4
+   Compiling serde_json v1.0.113
+   Compiling cudarc v0.10.0
+error: failed to run custom build command for `cudarc v0.10.0`
+
+Caused by:
+  process didn't exit successfully: `/workspaces/rust-data-engineering/rust-candle-demos/myapp-cuda/target/debug/build/cudarc-b828d6a6508f5bbb/build-script-build` (exit status: 101)
+  --- stdout
+  cargo:rerun-if-changed=build.rs
+  cargo:rerun-if-env-changed=CUDA_ROOT
+  cargo:rerun-if-env-changed=CUDA_PATH
+  cargo:rerun-if-env-changed=CUDA_TOOLKIT_ROOT_DIR
+
+  --- stderr
+  thread 'main' panicked at 'Unable to find `include/cuda.h` under any of: ["/usr", "/usr/local/cuda", "/opt/cuda", "/usr/lib/cuda", "C:/Program Files/NVIDIA GPU Computing Toolkit", "C:/CUDA"]. Set the `CUDA_ROOT` environment variable to `$CUDA_ROOT/include/cuda.h` to override path.', /usr/local/cargo/registry/src/index.crates.io-6f17d22bba15001f/cudarc-0.10.0/build.rs:21:13
+  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+NOTE: this gightu CodeSpace instance does not have GPU support!!!!!!
+if GPU is present, all these variable have to be set:
