@@ -222,6 +222,11 @@ SOLUTION:
 export LIBTORCH=/path/to/libtorch
 export LD_LIBRARY_PATH=${LIBTORCH}/lib:$LD_LIBRARY_PATH
 
+something like, put into post-install.sh   (install-libtorch.sh ?)
+# LIBTORCH paths
+export LIBTORCH=/workspaces/rust-pytorch-gpu-template/libtorch
+export LD_LIBRARY_PATH=${LIBTORCH}/lib:${LD_LIBRARY_PATH}
+
 
 
   @ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/rust-bert (main) $ cargo run --example sentence_embeddings
