@@ -1,0 +1,173 @@
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/diffusers-rs (main) $ make run
+cargo run --example stable-diffusion --features clap -- --prompt "A rusty robot holding a fire torch." 
+    Updating crates.io index
+  Downloaded torch-sys v0.13.0
+  Downloaded tch v0.13.0
+  Downloaded 2 crates (1.5 MB) in 0.37s (largest was `tch` at 1.3 MB)
+error: package `clap_derive v4.5.0` cannot be built because it requires rustc 1.74 or newer, while the currently active rustc version is 1.70.0
+Either upgrade to rustc 1.74 or newer, or use
+cargo update -p clap_derive@4.5.0 --precise ver
+where `ver` is the latest version of `clap_derive` supporting rustc 1.70.0
+make: *** [Makefile:20: run] Error 101
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/diffusers-rs (main) $ cargo update -p clap@4.5.0 --precise 4.0.19
+error: package ID specification `clap@4.5.0` did not match any packages
+Did you mean one of these?
+
+  clap@4.5.1
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/diffusers-rs (main) $ cargo update -p clap@4.5.1 --precise 4.0.19
+    Updating crates.io index
+    Removing anstream v0.6.11
+    Removing anstyle v1.0.6
+    Removing anstyle-parse v0.2.3
+    Removing anstyle-query v1.0.2
+    Removing anstyle-wincon v3.0.2
+      Adding atty v0.2.14
+ Downgrading clap v4.5.1 -> v4.0.19
+    Removing clap_builder v4.5.1
+ Downgrading clap_derive v4.5.0 -> v4.0.18
+ Downgrading clap_lex v0.7.0 -> v0.3.3
+    Removing colorchoice v1.0.0
+      Adding hermit-abi v0.1.19
+      Adding os_str_bytes v6.6.1
+      Adding proc-macro-error v1.0.4
+      Adding proc-macro-error-attr v1.0.4
+ Downgrading strsim v0.11.0 -> v0.10.0
+      Adding syn v1.0.109
+      Adding termcolor v1.4.1
+    Removing utf8parse v0.2.1
+      Adding winapi v0.3.9c
+      Adding winapi-i686-pc-windows-gnu v0.4.0
+      Adding winapi-util v0.1.6
+      Adding winapi-x86_64-pc-windows-gnu v0.4.0
+    Removing windows-sys v0.52.0
+    Removing windows-targets v0.52.0
+    Removing windows_aarch64_gnullvm v0.52.0
+    Removing windows_aarch64_msvc v0.52.0
+    Removing windows_i686_gnu v0.52.0
+    Removing windows_i686_msvc v0.52.0
+    Removing windows_x86_64_gnu v0.52.0
+    Removing windows_x86_64_gnullvm v0.52.0
+    Removing windows_x86_64_msvc v0.52.0
+
+
+PREREQUISITES:
+
+1. DOWNLOAD Weights from huggingface.co (https://huggingface.co/lmz/rust-stable-diffusion-v2-1/tree/main/weights) and place them into
+diffusers-rs/data  directory
+
+2. Gighub space instance must support GPU device
+
+3. @ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/diffusers-rs (main) $ 
+make run <enter>    # this will generate the immage of a robot holding a fire torch
+cargo run --example stable-diffusion --features clap -- --prompt "A rusty robot holding a fire torch." 
+   Compiling libc v0.2.153
+   Compiling version_check v0.9.4
+   Compiling cfg-if v1.0.0
+   Compiling proc-macro2 v1.0.78
+   Compiling typenum v1.17.0
+   Compiling generic-array v0.14.7
+   Compiling unicode-ident v1.0.12
+   Compiling pkg-config v0.3.30
+   Compiling jobserver v0.1.28
+   Compiling quote v1.0.35
+   Compiling cc v1.0.83
+   Compiling subtle v2.5.0
+   Compiling syn v2.0.49
+   Compiling crc32fast v1.4.0
+   Compiling crypto-common v0.1.6
+   Compiling block-buffer v0.10.4
+   Compiling cpufeatures v0.2.12
+   Compiling digest v0.10.7
+   Compiling base64ct v1.6.0
+   Compiling adler v1.0.2
+   Compiling miniz_oxide v0.7.2
+   Compiling zstd-sys v2.0.9+zstd.1.5.5
+   Compiling ring v0.17.7
+   Compiling bzip2-sys v0.1.11+1.0.8
+   Compiling serde v1.0.196
+   Compiling tinyvec_macros v0.1.1
+   Compiling zstd-safe v5.0.2+zstd.1.5.2
+   Compiling tinyvec v1.6.0
+   Compiling sha2 v0.10.8
+   Compiling serde_derive v1.0.196
+   Compiling hmac v0.12.1
+   Compiling inout v0.1.3
+   Compiling getrandom v0.2.12
+   Compiling untrusted v0.9.0
+   Compiling rustls-pki-types v1.3.0
+   Compiling powerfmt v0.2.0
+   Compiling serde_json v1.0.113
+   Compiling autocfg v1.1.0
+   Compiling spin v0.9.8
+   Compiling deranged v0.3.11
+   Compiling cipher v0.4.4
+   Compiling unicode-normalization v0.1.22
+   Compiling num-conv v0.1.0
+   Compiling rand_core v0.6.4
+   Compiling itoa v1.0.10
+   Compiling rustls v0.22.2
+   Compiling unicode-bidi v0.3.15
+   Compiling percent-encoding v2.3.1
+   Compiling time-core v0.1.2
+   Compiling ryu v1.0.16
+   Compiling time v0.3.34
+   Compiling idna v0.5.0
+   Compiling form_urlencoded v1.2.1
+   Compiling password-hash v0.4.2
+   Compiling aes v0.8.4
+   Compiling flate2 v1.0.28
+   Compiling sha1 v0.10.6
+   Compiling once_cell v1.19.0
+   Compiling byteorder v1.5.0
+   Compiling zeroize v1.7.0
+   Compiling anyhow v1.0.79
+   Compiling constant_time_eq v0.1.5
+   Compiling log v0.4.20
+   Compiling pbkdf2 v0.11.0
+   Compiling url v2.5.0
+   Compiling webpki-roots v0.26.1
+   Compiling base64 v0.21.7
+   Compiling num-traits v0.2.18
+   Compiling proc-macro-error-attr v1.0.4
+   Compiling syn v1.0.109
+   Compiling matrixmultiply v0.3.8
+   Compiling proc-macro-error v1.0.4
+   Compiling ppv-lite86 v0.2.17
+   Compiling rawpointer v0.2.1
+   Compiling thiserror v1.0.57
+   Compiling memchr v2.7.1
+   Compiling aho-corasick v1.1.2
+   Compiling rand_chacha v0.3.1
+   Compiling num-integer v0.1.46
+   Compiling num-complex v0.4.5
+   Compiling thiserror-impl v1.0.57
+   Compiling heck v0.4.1
+   Compiling tch v0.13.0
+   Compiling regex-syntax v0.8.2
+   Compiling os_str_bytes v6.6.1
+   Compiling clap_lex v0.3.3
+   Compiling clap_derive v4.0.18
+   Compiling ndarray v0.15.6
+   Compiling rand v0.8.5
+   Compiling regex-automata v0.4.5
+   Compiling safetensors v0.3.3
+   Compiling atty v0.2.14
+   Compiling half v2.3.1
+   Compiling strsim v0.10.0
+   Compiling bitflags v1.3.2
+   Compiling lazy_static v1.4.0
+   Compiling diffusers v0.3.1 (/workspaces/rust-data-engineering/rust-pytorch-gpu-template/diffusers-rs)
+   Compiling termcolor v1.4.1
+   Compiling regex v1.10.3
+   Compiling clap v4.0.19
+   Compiling bzip2 v0.4.4
+   Compiling zstd v0.11.2+zstd.1.5.2
+   Compiling rustls-webpki v0.102.2
+   Compiling zip v0.6.6
+   Compiling ureq v2.9.6
+   Compiling torch-sys v0.13.0
+    Finished dev [unoptimized + debuginfo] target(s) in 1m 22s
+     Running `target/debug/examples/stable-diffusion --prompt 'A rusty robot holding a fire torch.'`
+Cuda available: false                    <<<<<<  nvidia-smi -l  to monitor how much cuda gpu is engaged during conversation with the diffusion model
+Cudnn available: false                   <<<<<< 
+MPS available: false
