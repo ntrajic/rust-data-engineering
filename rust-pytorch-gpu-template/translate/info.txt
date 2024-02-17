@@ -1,0 +1,371 @@
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/translate (main) $ rustc --version
+rustc 1.70.0 (90c541806 2023-05-31)
+
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/translate (main) $ make run
+cargo run 
+    Updating crates.io index
+  Downloaded dirs-sys v0.3.7
+  Downloaded dirs v4.0.0
+  ...
+  Downloaded rust-bert v0.20.0
+  Downloaded 18 crates (1.7 MB) in 0.95s
+error: package `clap_derive v4.5.0` cannot be built because it requires rustc 1.74 or newer, while the currently active rustc version is 1.70.0
+Either upgrade to rustc 1.74 or newer, or use
+cargo update -p clap_derive@4.5.0 --precise ver                                   <<<<<< rustc suggests the fix
+where `ver` is the latest version of `clap_derive` supporting rustc 1.70.0
+make: *** [Makefile:20: run] Error 101
+
+FIX:
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/translate (main) $ cargo update -p clap@4.5.1 --precise 4.0.32
+    Updating crates.io index
+    Removing anstream v0.6.11
+    Removing anstyle v1.0.6
+    Removing anstyle-parse v0.2.3
+    Removing anstyle-query v1.0.2
+    Removing anstyle-wincon v3.0.2
+ Downgrading clap v4.5.1 -> v4.0.32
+    Removing clap_builder v4.5.1
+ Downgrading clap_derive v4.5.0 -> v4.0.21
+ Downgrading clap_lex v0.7.0 -> v0.3.3
+    Removing colorchoice v1.0.0
+      Adding is-terminal v0.4.12
+      Adding os_str_bytes v6.6.1
+      Adding proc-macro-error v1.0.4
+      Adding proc-macro-error-attr v1.0.4
+ Downgrading strsim v0.11.0 -> v0.10.0
+      Adding syn v1.0.109
+      Adding termcolor v1.4.1
+    Removing utf8parse v0.2.1
+      Adding winapi-util v0.1.6
+
+
+CONSUMING the BERT ML MODEL (rust-bert v0.20.0):
+
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/translate (main) $ make run           # no args supplied!!!!!
+cargo run 
+   Compiling libc v0.2.153
+   Compiling cfg-if v1.0.0
+   Compiling version_check v0.9.4
+   Compiling pkg-config v0.3.30
+   Compiling proc-macro2 v1.0.78
+   Compiling unicode-ident v1.0.12
+   Compiling typenum v1.17.0
+   Compiling generic-array v0.14.7
+   Compiling once_cell v1.19.0
+   Compiling autocfg v1.1.0
+   Compiling jobserver v0.1.28
+   Compiling quote v1.0.35
+   Compiling subtle v2.5.0
+   Compiling cc v1.0.83
+   Compiling syn v2.0.49
+   Compiling tinyvec_macros v0.1.1
+   Compiling tinyvec v1.6.0
+   Compiling crypto-common v0.1.6
+   Compiling block-buffer v0.10.4
+   Compiling digest v0.10.7
+   Compiling cpufeatures v0.2.12
+   Compiling memchr v2.7.1
+   Compiling getrandom v0.2.12
+   Compiling vcpkg v0.2.15
+   Compiling zstd-sys v2.0.9+zstd.1.5.5
+   Compiling itoa v1.0.10
+   Compiling unicode-bidi v0.3.15
+   Compiling log v0.4.20
+   Compiling pin-project-lite v0.2.13
+   Compiling base64ct v1.6.0
+   Compiling percent-encoding v2.3.1
+   Compiling crc32fast v1.4.0
+   Compiling form_urlencoded v1.2.1
+   Compiling openssl-sys v0.9.99
+   Compiling ring v0.17.7
+   Compiling bzip2-sys v0.1.11+1.0.8
+   Compiling bitflags v2.4.2
+   Compiling zstd-safe v5.0.2+zstd.1.5.2
+   Compiling bytes v1.5.0
+   Compiling adler v1.0.2
+   Compiling miniz_oxide v0.7.2
+   Compiling hmac v0.12.1
+   Compiling inout v0.1.3
+   Compiling powerfmt v0.2.0
+   Compiling cipher v0.4.4
+   Compiling flate2 v1.0.28
+   Compiling deranged v0.3.11
+   Compiling slab v0.4.9
+   Compiling socket2 v0.5.5
+   Compiling num_cpus v1.16.0
+   Compiling mio v0.8.10
+   Compiling base64 v0.21.7
+   Compiling rustls-pki-types v1.3.0
+   Compiling spin v0.9.8
+   Compiling time-core v0.1.2
+   Compiling num-conv v0.1.0
+   Compiling futures-core v0.3.30
+   Compiling serde v1.0.196
+   Compiling untrusted v0.9.0
+   Compiling time v0.3.34
+   Compiling tokio v1.36.0
+   Compiling aes v0.8.4
+   Compiling serde_derive v1.0.196
+   Compiling rand_core v0.6.4
+   Compiling sha1 v0.10.6
+   Compiling unicode-normalization v0.1.22
+   Compiling num-traits v0.2.18
+   Compiling tracing-core v0.1.32
+   Compiling openssl v0.10.63
+   Compiling fnv v1.0.7
+   Compiling crossbeam-utils v0.8.19
+   Compiling rustls v0.22.2
+   Compiling foreign-types-shared v0.1.1
+   Compiling constant_time_eq v0.1.5
+   Compiling byteorder v1.5.0
+   Compiling foreign-types v0.3.2
+   Compiling http v0.2.11
+   Compiling password-hash v0.4.2
+   Compiling tracing v0.1.40
+   Compiling idna v0.5.0
+   Compiling openssl-macros v0.1.1
+   Compiling sha2 v0.10.8
+   Compiling zeroize v1.7.0
+   Compiling hashbrown v0.14.3
+   Compiling futures-task v0.3.30
+   Compiling pin-utils v0.1.0
+   Compiling futures-io v0.3.30
+   Compiling rustix v0.38.31
+   Compiling futures-sink v0.3.30
+   Compiling native-tls v0.2.11
+   Compiling anyhow v1.0.79
+   Compiling ryu v1.0.16
+   Compiling httparse v1.8.0
+   Compiling equivalent v1.0.1
+   Compiling indexmap v2.2.3
+   Compiling tokio-util v0.7.10
+   Compiling futures-util v0.3.30
+   Compiling pbkdf2 v0.11.0
+   Compiling url v2.5.0
+   Compiling webpki-roots v0.26.1
+   Compiling aho-corasick v1.1.2
+   Compiling try-lock v0.2.5
+   Compiling thiserror v1.0.57
+   Compiling openssl-probe v0.1.5
+   Compiling linux-raw-sys v0.4.13
+   Compiling regex-syntax v0.8.2
+   Compiling lazy_static v1.4.0
+   Compiling regex-automata v0.4.5
+   Compiling want v0.3.1
+   Compiling h2 v0.3.24
+   Compiling crossbeam-epoch v0.9.18
+   Compiling http-body v0.4.6
+   Compiling futures-channel v0.3.30
+   Compiling thiserror-impl v1.0.57
+   Compiling matrixmultiply v0.3.8
+   Compiling proc-macro-error-attr v1.0.4
+   Compiling ahash v0.7.8
+   Compiling syn v1.0.109
+   Compiling rayon-core v1.12.1
+   Compiling serde_json v1.0.113
+   Compiling ppv-lite86 v0.2.17
+   Compiling httpdate v1.0.3
+   Compiling tower-service v0.3.2
+   Compiling hyper v0.14.28
+   Compiling rand_chacha v0.3.1
+   Compiling regex v1.10.3
+   Compiling crossbeam-deque v0.8.5
+   Compiling tokio-native-tls v0.3.1
+   Compiling proc-macro-error v1.0.4
+   Compiling rawpointer v0.2.1
+   Compiling either v1.10.0
+   Compiling protobuf v2.27.1
+   Compiling hyper-tls v0.5.0
+   Compiling rand v0.8.5
+   Compiling xattr v1.3.1
+   Compiling console v0.15.8
+   Compiling num-integer v0.1.46
+   Compiling num-complex v0.4.5
+   Compiling serde_urlencoded v0.7.1
+   Compiling rustls-pemfile v1.0.4
+   Compiling csv-core v0.1.11
+   Compiling filetime v0.2.23
+   Compiling encoding_rs v0.8.33
+   Compiling ipnet v2.9.0
+   Compiling mime v0.3.17
+   Compiling fastrand v2.0.1
+   Compiling number_prefix v0.4.0
+   Compiling rust_tokenizers v7.0.2
+   Compiling sync_wrapper v0.1.2
+   Compiling smallvec v1.13.1
+   Compiling indicatif v0.16.2
+   Compiling unicode-normalization-alignments v0.1.12
+   Compiling reqwest v0.11.24
+   Compiling tempfile v3.10.0
+   Compiling csv v1.3.0
+   Compiling tar v0.4.40
+   Compiling ndarray v0.15.6
+   Compiling hashbrown v0.12.3
+   Compiling rayon v1.8.1
+   Compiling itertools v0.10.5
+   Compiling fs2 v0.4.3
+   Compiling dirs-sys v0.3.7
+   Compiling half v1.8.2
+   Compiling glob v0.3.1
+   Compiling os_str_bytes v6.6.1
+   Compiling heck v0.4.1
+   Compiling clap_lex v0.3.3
+   Compiling clap_derive v4.0.21
+   Compiling dirs v4.0.0
+   Compiling ordered-float v3.9.2
+   Compiling uuid v1.7.0
+   Compiling is-terminal v0.4.12
+   Compiling half v2.3.1
+   Compiling strsim v0.10.0
+   Compiling termcolor v1.4.1
+   Compiling bitflags v1.3.2
+   Compiling clap v4.0.32
+   Compiling bzip2 v0.4.4
+   Compiling zstd v0.11.2+zstd.1.5.2
+   Compiling zip v0.6.6
+   Compiling rustls-webpki v0.102.2
+   Compiling cached-path v0.6.1
+   Compiling ureq v2.9.6
+   Compiling torch-sys v0.10.3
+   Compiling tch v0.10.3
+   Compiling rust-bert v0.20.0
+   Compiling translate v0.1.0 (/workspaces/rust-data-engineering/rust-pytorch-gpu-template/translate)
+    Finished dev [unoptimized + debuginfo] target(s) in 2m 12s
+     Running `target/debug/translate`                              # <<<< but no args/commands supplied
+
+@ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/translate (main) $ cargo run -- --help
+    Finished dev [unoptimized + debuginfo] target(s) in 0.13s
+     Running `target/debug/translate --help`
+A Hugging Face Translation Tool in Rust
+
+Usage: translate [COMMAND]
+
+Commands:
+  translate  
+  print      
+  help       Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help     Print help information
+  -V, --version  Print version information
+
+file: lyrics.txt
+Uh-uh-uh-uh, uh-uh
+Ella despidió a su amor
+El partió en un barco en el muelle de San Blas
+El juró que volvería
+Y empapada en llanto, ella juró que esperaría
+Miles de lunas pasaron
+Y siempre ella estaba en el muelle, esperando
+Muchas tardes se anidaron
+Se anidaron en su pelo y en sus labios
+Uh-uh-uh-uh, uh-uh
+Uh-uh-uh-uh, uh-uh
+Llevaba el mismo vestido
+Y por si él volviera, no se fuera a equivocar
+Los cangrejos le mordían
+Su ropaje, su tristeza y su ilusión
+Y el tiempo se escurrió
+Y sus ojos se le llenaron de amaneceres
+Y del mar se enamoró
+Y su cuerpo se enraizó en el muelle
+, sola en el olvido
+(Sola), sola con su espíritu
+(Sola), sola con su amor el mar
+(Sola), en el muelle de San Blas
+Su cabello se blanqueó
+Pero ningún barco a su amor le devolvía
+Y en el pueblo le decían
+Le decían la loca del muelle de San Blas
+Y una tarde de abril
+La intentaron trasladar al manicomio
+Nadie la pudo arrancar
+Y del mar nunca jamás la separaron
+, sola en el olvido
+(Sola), sola con su espíritu
+(Sola), sola con su amor el mar
+(Sola), en el muelle de San Blas
+, sola en el olvido
+(Sola), sola con su espíritu
+(Sola), sola con el sol y el mar
+(Sola), ¡Oh, sola!
+Sola en el olvido
+(Sola), sola con su espíritu
+(Sola), sola con su amor el mar
+(Sola), en el muelle de San Blas
+Se quedó
+Se quedó sola, sola
+Se quedó
+Se quedó con el sol y con el mar
+Se quedó ahí
+Se quedó hasta el fin
+Se quedó ahí
+Se quedó en el muelle de San Blas
+Uoh, oh-oh-oh
+Sola, sola se quedó
+Uoh, oh-oh-oh
+
+
+INFERENCE:   (will translate lyrics.txt into english)
+
+  @ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/translate (main) $ cargo run -- translate --path lyrics.txt
+    Finished dev [unoptimized + debuginfo] target(s) in 0.14s
+     Running `target/debug/translate translate --path lyrics.txt`
+Downloading https://huggingface.co/Helsinki-NLP/opus-mt-ROMANCE-en/resolve/main/vocab.json [1.39MiB]... ✓ Done! Finished in 0 seconds
+Downloading https://huggingface.co/Helsinki-NLP/opus-mt-ROMANCE-en/resolve/main/source.spm [781.33KiB]... ✓ Done! Finished in 0 seconds
+Downloading https://huggingface.co/Helsinki-NLP/opus-mt-ROMANCE-en/resolve/main/config.json [1.33KiB]... ✓ Done! Finished in 0 seconds
+Downloading https://huggingface.co/Helsinki-NLP/opus-mt-ROMANCE-en/resolve/main/rust_model.ot [551.55MiB]........ ✓ Done! Finished in 19 seconds
+ Uh-uh-uh-uh, uh-uh
+ She fired her love
+ He left on a boat at the pier of San Blas
+ He swore he'd come back.
+ And soaked in tears, she swore she'd wait
+ Thousands of moons passed
+ And she was always at the pier, waiting
+ Many evenings nested
+ They nested in their hair and lips
+ Uh-uh-uh-uh, uh-uh
+ Uh-uh-uh-uh, uh-uh
+ He was wearing the same dress.
+ And in case he came back, he wouldn't go wrong.
+ Crabs bit him.
+ Her clothes, her sadness and her illusion
+ And the time ran out
+ And his eyes were filled with dawns.
+ And the sea fell in love
+ And his body was rooted on the pier
+, alone in oblivion
+ (Sole), alone with his spirit
+ (Sola), alone with his love the sea
+ (Sola), on the pier of San Blas
+ Her hair was bleached
+ But no ship to his love returned him
+ And they said to him in the people,
+ He was told by the madman at the pier of San Blas
+ And an afternoon in April
+ They tried to move her to the asylum.
+ No one could pull it off.
+ And from the sea, they never separated her.
+, alone in oblivion
+ (Sole), alone with his spirit
+ (Sola), alone with his love the sea
+ (Sola), on the pier of San Blas
+, alone in oblivion
+ (Sole), alone with his spirit
+ (Sola), alone with the sun and the sea
+ (Sola) Oh, alone!
+ Alone in forgetfulness
+ (Sole), alone with his spirit
+ (Sola), alone with his love the sea
+ (Sola), on the pier of San Blas
+ He's staying.
+ She was alone, alone.
+ He's staying.
+ He stayed with the sun and the sea
+ He stayed there.
+ He stayed to the end.
+ He stayed there.
+ He stayed at the pier of San Blas
+ Ooh, oh-oh-oh.
+ Alone, alone he stayed
+ Ooh, oh-oh-oh.
