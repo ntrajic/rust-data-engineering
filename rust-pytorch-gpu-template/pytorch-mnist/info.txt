@@ -1,0 +1,7 @@
+simple training of mnist digits w/ rust tch-rs lib:
+===================================================
+cargo run -- conv  <enter>
+
+in the presence of mnist sample data in the "data" dir, and in the presence of GPU (should fall to CPU for training when GPU not present)
+
+
