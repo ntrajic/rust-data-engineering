@@ -1,0 +1,117 @@
+0. PREREQUISITE: 
+
+create model dir: mkdir rusty-deploy/rtorchdir/model
+
+@ntrajic ➜ .../rust-data-engineering/rust-pytorch-gpu-template/rusty-deploy/rtorchdist (main) $ ./sync-models.sh 
+Downloading vgg13.ot...
+Downloading squeezenet1_1.ot...
+Downloading resnet18.ot...
+Downloading densenet121.ot...
+Downloading mobilenet-v2.ot...
+Downloading squeezenet1_0.ot...
+Downloading inception-v3.ot...
+Downloading vgg19.ot...
+Downloading resnet34.ot...
+Downloading alexnet.ot...
+Downloading vgg16.ot...
+All files have been downloaded or updated in the 'model' directory.
+
+1. @ntrajic ➜ .../rust-data-engineering/rust-pytorch-gpu-template/rusty-deploy/rtorchdist (main) $ 
+make run  <enter>
+
+OUTPUT:
+RUST_LOG="debug,info,trace,actix_web=info"; \
+RUST_BACKTRACE=1; \
+cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.15s
+     Running `target/debug/rtorchdist`
+Starting pytorch model server...
+[2024-02-17T08:36:53Z INFO  actix_server::builder] starting 4 workers
+[2024-02-17T08:36:53Z INFO  actix_server::server] Actix runtime found; starting in Actix runtime
+[2024-02-17T08:37:17Z INFO  rtorchdist::routes] route: / function: index()
+[2024-02-17T08:37:17Z INFO  actix_web::middleware::logger] 127.0.0.1 "GET / HTTP/1.1" 200 178 "https://github.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" 0.000177
+[2024-02-17T08:37:17Z INFO  actix_web::middleware::logger] 127.0.0.1 "GET /favicon.ico HTTP/1.1" 404 0 "https://automatic-space-invention-7v776v6qr3r767-8080.app.github.dev/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" 0.000147
+
+
+2. open in the browser at: https://automatic-space-invention-7v776v6qr3r767-8080.app.github.dev/
+log spitted from webserver:
+@ntrajic ➜ .../rust-data-engineering/rust-pytorch-gpu-template/rusty-deploy/rtorchdist (main) $ ./smoke_test_routes.sh 
+Testing route: /
+Send an image payload using curl with the following command:
+curl -X POST -H "Content-Type: multipart/form-data" -F "image=@/path/to/your/image.jpg" http://127.0.0.1:8080/predictTesting route: /check_image_prediction
+{"result":{"classes":["tarantula"],"probabilities":[0.05008324980735779]},"status":"success"}Testing route: /check_pytorch_cpu
+"PyTorch CPU: self check successful with tensor: 3"Testing route: /check_image_upload
+{"filepath":"./tmp/image.jpg","status":"success"}Testing route: /predict
+{"result":{"classes":["tarantula"],"probabilities":[0.05008324980735779]},"status":"success"}--2024-02-17 10:46:45--  https://upload.wikimedia.org/wikipedia/commons/6/66/An_up-close_picture_of_a_curious_male_domestic_shorthair_tabby_cat.jpg
+Resolving upload.wikimedia.org (upload.wikimedia.org)... 198.35.26.112, 2620:0:863:ed1a::2:b
+Connecting to upload.wikimedia.org (upload.wikimedia.org)|198.35.26.112|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 789779 (771K) [image/jpeg]
+Saving to: ‘cat.jpg’
+
+cat.jpg                                            100%[=============================================================================================================>] 771.27K  --.-KB/s    in 0.1s    
+
+2024-02-17 10:46:45 (5.97 MB/s) - ‘cat.jpg’ saved [789779/789779]
+
+==================================================================================================================
+{"result":{"classes":["tiger cat"],"probabilities":[0.08131812512874603]},"status":"success"}      <<<<<<< OK
+==================================================================================================================
+
+e.g. @ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/rusty-deploy (main) $ 
+cd rtorchdist/
+3. in the terminal (in the rtorchdist dir):
+Send an image payload using curl with the following command:
+curl -X POST -H "Content-Type: multipart/form-data" -F "image=@/path/to/your/image.jpg" http://127.0.0.1:8080/predict
+
+e.g. @ntrajic ➜ .../rust-data-engineering/rust-pytorch-gpu-template/rusty-deploy/rtorchdist (main) $ 
+curl -X POST -H "Content-Type: multipart/form-data" -F "image=@lion.jpg" http://127.0.0.1:8080/predict
+OUTPUT:
+==============================================================================================================
+{"result":{"classes":["tarantula"],"probabilities":[0.05008324980735779]},"status":"success"}     <<< OK
+==============================================================================================================        
+
+
+@ntrajic ➜ .../rust-data-engineering/rust-pytorch-gpu-template/rusty-deploy/rtorchdist (main) $ ls -alt tmp/image.jpg 
+-rw-rw-rw- 1 vscode vscode 286559 Feb 17 08:44 tmp/image.jpg
+
+4. it is necessary to downoload weights for the model  into: model/resnet34.ot
+
+
+
+
+@ntrajic ➜ .../rust-data-engineering/rust-pytorch-gpu-template/rusty-deploy/rtorchdist (main) $ ./smoke_test_routes.sh 
+Testing route: /
+Send an image payload using curl with the following command:
+curl -X POST -H "Content-Type: multipart/form-data" -F "image=@/path/to/your/image.jpg" http://127.0.0.1:8080/predictTesting route: /check_image_prediction
+curl: (52) Empty reply from server
+Testing route: /check_pytorch_cpu
+"PyTorch CPU: self check successful with tensor: 3"Testing route: /check_image_upload
+{"filepath":"./tmp/image.jpg","status":"success"}Testing route: /predict
+curl: (52) Empty reply from server
+--2024-02-17 09:13:11--  https://upload.wikimedia.org/wikipedia/commons/6/66/An_up-close_picture_of_a_curious_male_domestic_shorthair_tabby_cat.jpg
+Resolving upload.wikimedia.org (upload.wikimedia.org)... 198.35.26.112, 2620:0:863:ed1a::2:b
+Connecting to upload.wikimedia.org (upload.wikimedia.org)|198.35.26.112|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 789779 (771K) [image/jpeg]
+Saving to: ‘cat.jpg’
+
+cat.jpg                                            100%[=============================================================================================================>] 771.27K  --.-KB/s    in 0.1s    
+
+2024-02-17 09:13:11 (6.01 MB/s) - ‘cat.jpg’ saved [789779/789779]
+
+/usr/local/cargo/registry/src/index.crates.io-6f17d22bba15001f/image-0.24.8/tests/images/jpg/progressive/cat.jpg
+
+
+
+4 enable docker withing gighub space ????:
+sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+
