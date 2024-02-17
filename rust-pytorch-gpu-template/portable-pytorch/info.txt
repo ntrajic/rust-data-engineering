@@ -1,0 +1,5 @@
+cargo update -p clap@4.5.1 --precise 4.0.32
+
+Cargo.Toml:  upd: tract-onnx = { version = "0.19.5-pre" }
+
++ You will need to download resnet18.ot weights from huggingface.co
