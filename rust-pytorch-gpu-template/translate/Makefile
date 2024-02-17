@@ -17,6 +17,6 @@ clean:
 	cargo clean
 
 run:
-	cargo run 
+	cargo run -- translate --path lyrics.txt
 
 all: format lint test run

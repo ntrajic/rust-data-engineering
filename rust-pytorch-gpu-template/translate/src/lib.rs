@@ -21,7 +21,6 @@ pub fn read_file_array(path: String) -> anyhow::Result<Vec<String>> {
     Ok(array)
 }
 
-
 //build a function that reads a file and translates it
 pub fn translate_file(path: String) -> anyhow::Result<()> {
     let model = TranslationModelBuilder::new()

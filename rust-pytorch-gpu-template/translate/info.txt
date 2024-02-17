@@ -249,7 +249,8 @@ Options:
   -h, --help     Print help information
   -V, --version  Print version information
 
-file: lyrics.txt
+orig file: lyrics.txt (Spanish)
+=====================
 Uh-uh-uh-uh, uh-uh
 Ella despidió a su amor
 El partió en un barco en el muelle de San Blas
@@ -308,13 +309,16 @@ Uoh, oh-oh-oh
 
 INFERENCE:   (will translate lyrics.txt into english)
 
-  @ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/translate (main) $ cargo run -- translate --path lyrics.txt
+  @ntrajic ➜ /workspaces/rust-data-engineering/rust-pytorch-gpu-template/translate (main) $ 
+  cargo run -- translate --path lyrics.txt
+
     Finished dev [unoptimized + debuginfo] target(s) in 0.14s
      Running `target/debug/translate translate --path lyrics.txt`
 Downloading https://huggingface.co/Helsinki-NLP/opus-mt-ROMANCE-en/resolve/main/vocab.json [1.39MiB]... ✓ Done! Finished in 0 seconds
 Downloading https://huggingface.co/Helsinki-NLP/opus-mt-ROMANCE-en/resolve/main/source.spm [781.33KiB]... ✓ Done! Finished in 0 seconds
 Downloading https://huggingface.co/Helsinki-NLP/opus-mt-ROMANCE-en/resolve/main/config.json [1.33KiB]... ✓ Done! Finished in 0 seconds
 Downloading https://huggingface.co/Helsinki-NLP/opus-mt-ROMANCE-en/resolve/main/rust_model.ot [551.55MiB]........ ✓ Done! Finished in 19 seconds
+TRANSLATED orig file text to English:
  Uh-uh-uh-uh, uh-uh
  She fired her love
  He left on a boat at the pier of San Blas
