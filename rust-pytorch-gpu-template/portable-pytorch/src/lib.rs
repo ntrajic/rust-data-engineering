@@ -1,7 +1,20 @@
+//#[macro_use]
+extern crate tract_onnx;
+use tract_onnx::prelude::*;                       // will allow to use tvec!
 use tract_onnx::prelude::DatumExt;
-use tract_ndarray::Array;
-use tract_ndarray::prelude::*
 
+
+use tract_ndarray::Array;
+//use tract_ndarray::Array2;
+//use tract_ndarray::Array4;
+//use tract_ndarray::prelude::*;
+//use tract_core::internal::*;
+
+use tract_onnx::pb::type_proto::Tensor;
+use tract_onnx::prelude::Framework;
+use tract_onnx::prelude::InferenceModelExt;
+
+pub extern crate ndarray;
 
 //accepts image as input string
 pub fn export(imagepath: String) -> Result<(), Box<dyn std::error::Error>> {
@@ -26,9 +39,9 @@ pub fn export(imagepath: String) -> Result<(), Box<dyn std::error::Error>> {
             resized[(x as _, y as _)][c] as f32 / 255.0
         }) - mean)
             / std)
-            .into();
+            .into();                 // this is not implemented!!!!!  ^^^^ the trait `From<ArrayBase<OwnedRepr<f32>, ndarray::Dim<[usize; 4]>>>` is not implemented for `tract_onnx::pb::type_proto::Tensor`
 
-    let result = model.run(tvec!(image.into()))?;
+    let result = model.run(tvec!(image.into()))?; //let result = model.run(vec!(image.into()))?;   // arguments to this method are incorrect b/c ^^^^ the trait `From<tract_onnx::pb::type_proto::Tensor>` is not implemented for `TValue`
 
     // find and display the max value with its index
     let best = result[0]
